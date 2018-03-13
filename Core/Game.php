@@ -23,6 +23,21 @@ class Game
         ];
     }
 
+    public function getRoundsCount()
+    {
+        return $this->roundsCount;
+    }
+
+    public function getPlayerOneScore()
+    {
+        return $this->playerOneScore;
+    }
+
+    public function getPlayerTwoScore()
+    {
+        return $this->playerTwoScore;
+    }
+
     public function playRounds($num)
     {
         $count = (int)$num;
