@@ -26,8 +26,8 @@ class Game
     public function playRounds($num)
     {
         $count = (int)$num;
-        if ($count != $num) {
-            throw new \Exception('Rounds count must be a integer.');
+        if (!is_numeric($num) || $count != $num) {
+            throw new \InvalidArgumentException('Rounds count must be a integer.');
         }
 
         $this->roundsCount = $count;
@@ -55,7 +55,7 @@ class Game
 
     public function winner()
     {
-        $this->result .= "Player One Score: {$this->playerOneScore}\n Player Two Score: {$this->playerTwoScore}\n";
+        $this->result .= "Player One Score: {$this->playerOneScore}\nPlayer Two Score: {$this->playerTwoScore}\n";
         $this->result .= "Game Winner: ";
 
         if ($this->playerOneScore > $this->playerTwoScore) {
