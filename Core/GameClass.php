@@ -4,13 +4,15 @@ namespace Core;
 class Game
 {
 
-    private $playerOneResult = 0;
+    private $playerOneScore = 0;
 
-    private $playerTwoResult = 0;
+    private $playerTwoScore = 0;
 
     private $roundsCount = 0;
 
     private $hands = [];
+
+    private $result = '';
 
     public function __construct()
     {
@@ -33,12 +35,17 @@ class Game
 
     public function play()
     {
-        for ($i = 0; $i < $this->roundsCount; $i++) {
+        for ($i = 1; $i <= $this->roundsCount; $i++) {
             $playerOneHand = mt_rand(1, count($this->hands));
             $playerTwoHand = mt_rand(1, count($this->hands));
 
+            $this->result .= "Round: {$i}\n";
+            $this->result .= "Player One: {$this->hands[$playerOneHand]}\nPlayer Two: {$this->hands[$playerTwoHand]}\n";
+
             if ($playerOneHand === $playerTwoHand) {
                 --$i;
+                $this->result .= "Round is Tie.\n\n";
+
                 continue;
             }
 
@@ -48,17 +55,43 @@ class Game
 
     public function winner()
     {
-        // display winner
+        $this->result .= "Player One Score: {$this->playerOneScore}\n Player Two Score: {$this->playerTwoScore}\n";
+        $this->result .= "Game Winner: ";
+
+        if ($this->playerOneScore > $this->playerTwoScore) {
+            $this->result .= "Player One\n";
+        } elseif ($this->playerOneScore < $this->playerTwoScore) {
+            $this->result .= "Player Two\n";
+        } else {
+            $this->result .= "No Winner\n";
+        }
+
+        echo $this->result;
     }
 
     private function addScore($playerOneHand, $playerTwoHand)
     {
+        $isHandsEvenOrOdd = (bool)($playerOneHand % 2) === (bool)($playerTwoHand % 2);
+        $roundWinner = 'Player ';
 
+        if ($isHandsEvenOrOdd) {
+            if ($playerOneHand < $playerTwoHand) {
+                ++$this->playerOneScore;
+                $roundWinner .= 'One';
+            } else {
+                ++$this->playerTwoScore;
+                $roundWinner .= 'Two';
+            }
+        } else {
+            if ($playerOneHand > $playerTwoHand) {
+                ++$this->playerOneScore;
+                $roundWinner .= 'One';
+            } else {
+                ++$this->playerTwoScore;
+                $roundWinner .= 'Two';
+            }
+        }
+
+        $this->result .= "Round is for {$roundWinner}.\n\n";
     }
-
-    private function getMove()
-    {
-        // returns random item
-    }
-
 }

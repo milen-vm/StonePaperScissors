@@ -1,4 +1,7 @@
 <?php
+/**
+ * php -f start.php
+ */
 
 spl_autoload_register(function ($class)
 {
