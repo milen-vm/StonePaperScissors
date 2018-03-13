@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit bootstrap="./vendor/autoload.php"
+         colors="true"
+         convertErrorsToExeptions="true"
+         convertNoticesToExeptions="true"
+         convertWarningsToExeptions="true"
+         pocessIsolation="false"
+         stopOnFailure="false"
+         sintaxCheck="false"
+>
+    <testsuites>
+        <testsuite name="Application Test Suite Stone Paper Scissors">
+            <directory>./tests/</directory>
+        </testsuite>
+    </testsuites>
+</phpunit>
