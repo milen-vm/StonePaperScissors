@@ -5,13 +5,9 @@ class Game
 {
 
     private $playerOneScore = 0;
-
     private $playerTwoScore = 0;
-
     private $roundsCount = 0;
-
     private $hands = [];
-
     private $result = '';
 
     public function __construct()
