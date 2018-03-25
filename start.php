@@ -9,7 +9,7 @@
 
 require_once __DIR__ . '/vendor/autoload.php';
 
-$game = new Core\Game();
+$game = new \App\Game();
 $game->playRounds(3);
 $game->play();
 $game->winner();

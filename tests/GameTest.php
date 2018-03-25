@@ -7,13 +7,13 @@ final class GameTest extends TestCase
     private $game;
 
     protected function setUp() {
-        $this->game = new \Core\Game();
+        $this->game = new \App\Game();
     }
 
     public function testCanBeCreatedNewGame()
     {
         $this->assertInstanceOf(
-            \Core\Game::class,
+            \App\Game::class,
             $this->game
         );
     }
