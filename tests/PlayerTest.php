@@ -5,40 +5,42 @@ use App\Player;
 class PlayerTest extends TestCase
 {
 
+    /**
+     * @var Player
+     */
+    private $player;
+
+    public function setUp()
+    {
+        $this->player = new Player('Linus');
+    }
+
     public function testCanInstantiatePlayer()
     {
-        $player = new Player('Linus');
-
-        $this->assertInstanceOf(Player::class, $player);
-        $this->assertEquals('Linus', $player->getName());
+        $this->assertInstanceOf(Player::class, $this->player);
+        $this->assertEquals('Linus', $this->player->getName());
     }
 
     public function testIsCorrectOneScoreAddingToThePlayersResult()
     {
-        $player = new Player('Linus');
+        $this->player->addScore();
 
-        $player->addScore();
-
-        $this->assertEquals(1, $player->getScore());
+        $this->assertEquals(1, $this->player->getScore());
     }
 
     public function testCanAddMoreThatOneScoresToThePlayersResult()
     {
-        $player = new Player('Linus');
+        $this->player->addScore();
+        $this->player->addScore(2);
 
-        $player->addScore();
-        $player->addScore(2);
-
-        $this->assertEquals(3, $player->getScore());
+        $this->assertEquals(3, $this->player->getScore());
     }
 
     /**
      * @expectedException InvalidArgumentException
      */
-    public function testThrowsExceptionIfTryToSetInvalidScoresToPlayersResult()
+    public function testThrowsExceptionIfTryToSetInvalidScores()
     {
-        $player = new Player('Linus');
-
-        $player->addScore(2.45);
+        $this->player->addScore(2.45);
     }
 }

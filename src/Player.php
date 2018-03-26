@@ -4,7 +4,9 @@ namespace App;
 class Player
 {
 
-    private $name = '';
+    private $name;
+    private $hand;
+//    private $handIndex;
     private $score = 0;
 
     public function __construct($name)
@@ -15,6 +17,16 @@ class Player
     public function getName()
     {
         return $this->name;
+    }
+
+    public function getHand()
+    {
+        return $this->hand;
+    }
+
+    public function setHand($hand)
+    {
+        $this->hand = $hand;
     }
 
     public function getScore()
@@ -30,5 +42,10 @@ class Player
         }
 
         $this->score += $score;
+    }
+
+    public function __toString()
+    {
+        return $this->name;
     }
 }

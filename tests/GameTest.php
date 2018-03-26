@@ -1,5 +1,7 @@
 <?php
 use PHPUnit\Framework\TestCase;
+use App\Game;
+use App\Player;
 
 final class GameTest extends TestCase
 {
@@ -7,13 +9,15 @@ final class GameTest extends TestCase
     private $game;
 
     protected function setUp() {
-        $this->game = new \App\Game();
+        $playerOne = new Player('One');
+        $playerTwo = new Player('Two');
+        $this->game = new Game($playerOne, $playerTwo);
     }
 
     public function testCanBeCreatedNewGame()
     {
         $this->assertInstanceOf(
-            \App\Game::class,
+            Game::class,
             $this->game
         );
     }
@@ -38,8 +42,8 @@ final class GameTest extends TestCase
         $this->game->playRounds(6);
         $this->game->play();
 
-        $scoreSum = $this->game->getPlayerOneScore();
-        $scoreSum += $this->game->getPlayerTwoScore();
+        $scoreSum = $this->game->playerOneScore();
+        $scoreSum += $this->game->playerTwoScore();
 
         $this->assertEquals($this->game->getRoundsCount(), $scoreSum);
     }
