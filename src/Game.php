@@ -96,7 +96,7 @@ class Game
                 "{$this->playerOne->getName()}: {$this->playerOne->getHand()}" . PHP_EOL .
                 "{$this->playerTwo->getName()}: {$this->playerTwo->getHand()}" . PHP_EOL;
 
-            $roundWinner = $this->getRoundWinner($this->playerOne, $this->playerTwo);
+            $roundWinner = $this->getRoundWinner();
             if (!$roundWinner) {
                 --$i;
                 $this->result .= "Round is Tie" . PHP_EOL . PHP_EOL;
@@ -137,7 +137,7 @@ class Game
             }
         }
 
-        $winner = $this->getRoundWinner($this->playerOne, $this->playerTwo);
+        $winner = $this->getRoundWinner();
         if ($winner) {
             $winner->addScore();
         }
@@ -146,14 +146,12 @@ class Game
     }
 
     /**
-     * @param Player $playerOne
-     * @param Player $playerTwo
      * @return Player
      */
-    private function getRoundWinner(Player $playerOne, Player $playerTwo)
+    private function getRoundWinner()
     {
-        $handIndexPlayerOne = array_search($playerOne->getHand(), $this->hands);
-        $handIndexPlayerTwo = array_search($playerTwo->getHand(), $this->hands);
+        $handIndexPlayerOne = array_search($this->playerOneHand(), $this->hands);
+        $handIndexPlayerTwo = array_search($this->playerTwoHand(), $this->hands);
 
         if ($handIndexPlayerOne === $handIndexPlayerTwo) {
             return null;
@@ -164,15 +162,15 @@ class Game
 
         if ($isHandsEvenOrOdd) {
             if ($handIndexPlayerOne < $handIndexPlayerTwo) {
-                $roundWinner = $playerOne;
+                $roundWinner = $this->playerOne;
             } else {
-                $roundWinner = $playerTwo;
+                $roundWinner = $this->playerTwo;
             }
         } else {
             if ($handIndexPlayerOne > $handIndexPlayerTwo) {
-                $roundWinner = $playerOne;
+                $roundWinner = $this->playerOne;
             } else {
-                $roundWinner = $playerTwo;
+                $roundWinner = $this->playerTwo;
             }
         }
 
@@ -208,6 +206,6 @@ class Game
             $str .= 'No winner';
         }
 
-        echo $this->result . $str . PHP_EOL;
+        echo $this->result . $str . PHP_EOL . PHP_EOL;
     }
 }
