@@ -13,15 +13,13 @@ $playerOne = new \App\Player('George');
 $playerTwo = new \App\Player('Michel');
 
 $game = new \App\Game($playerOne, $playerTwo);
-//$game->playRounds(3);
-//$game->play();
-//
-//$winner = $game->winner();
-//$game->printResult();
-
-$playerOne->setHand('Paper');
-$playerTwo->setHand('Stone');
-echo $game->fight();
+$game->playRounds(3);
+$game->play();
 $game->printResult();
+
+$playerOne->setHand('Scissors');
+$playerTwo->setHand('Stone');
+echo 'Fight Winner: ' . $game->fight();
+
 
 
